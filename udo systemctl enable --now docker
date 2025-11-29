@@ -1,0 +1,23 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (]8;;file://bouxi003-satellitec70dc10v/usr/lib/systemd/system/docker.service\/usr/lib/systemd/system/docker.service]8;;\; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Sun 2025-11-23 10:54:15 CET; 5h 54min ago
+ Invocation: 1306914d7205421ea0471b3406f15b4d
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: ]8;;https://docs.docker.com\https://docs.docker.com]8;;\
+   Main PID: 1791 (dockerd)
+      Tasks: 11
+     Memory: 28.8M (peak: 100.9M, swap: 6.2M, swap peak: 6.2M)
+        CPU: 6.633s
+     CGroup: /system.slice/docker.service
+             └─[0;38;5;245m1791 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock[0m
+
+nov 23 10:54:14 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:14.036035014+01:00" level=warning msg="failed to determine if container is already mounted" container=2b99f5b9d83e5dbc49f65d5512d77b099b66729f70f1601b6ebe41d850318d1b
+nov 23 10:54:14 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:14.074721469+01:00" level=info msg="Deleting nftables IPv4 rules" error="exit status 1"
+nov 23 10:54:14 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:14.087606996+01:00" level=info msg="Deleting nftables IPv6 rules" error="exit status 1"
+nov 23 10:54:14 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:14.983265078+01:00" level=info msg="Loading containers: done."
+nov 23 10:54:15 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:15.007267495+01:00" level=info msg="Docker daemon" commit=e9ff10b containerd-snapshotter=true storage-driver=overlayfs version=29.0.2
+nov 23 10:54:15 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:15.007920151+01:00" level=info msg="Initializing buildkit"
+nov 23 10:54:15 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:15.037642536+01:00" level=info msg="Completed buildkit initialization"
+nov 23 10:54:15 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:15.059928793+01:00" level=info msg="Daemon has completed initialization"
+nov 23 10:54:15 bouxi003-satellitec70dc10v dockerd[1791]: time="2025-11-23T10:54:15.060078692+01:00" level=info msg="API listen on /run/docker.sock"
+nov 23 10:54:15 bouxi003-satellitec70dc10v systemd[1]: Started docker.service - Docker Application Container Engine.

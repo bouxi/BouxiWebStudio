@@ -1,0 +1,55 @@
+security:
+  # Comment les mots de passe sont hashés pour l'entité User
+  password_hashers:
+    App\Entity\User:
+      algorithm: auto
+
+  # Où Symfony va chercher les utilisateurs (en BDD via l'entité User)
+  providers:
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+
+  firewalls:
+    # Firewall spécial pour le profiler + assets => pas sécurisé
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+
+    # Firewall principal pour ton site
+    main:
+      lazy: true
+      provider: app_user_provider
+
+      # Formulaire de login classique
+      form_login:
+        login_path: app_login      # route de la page /login
+        check_path: app_login      # même route, Symfony gère le POST
+        enable_csrf: true
+
+      # Déconnexion
+      logout:
+        path: app_logout           # route /logout
+        target: app_home           # après logout -> page d'accueil
+
+  # Règles d'accès (par URL)
+  access_control:
+    # Zone admin protégée
+    - { path: ^/admin, roles: ROLE_ADMIN }
+
+    # Login & register accessibles à tout le monde
+    - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/register, roles: PUBLIC_ACCESS }
+
+    # Exemple : /profile uniquement pour les utilisateurs connectés
+    - { path: ^/profile, roles: ROLE_USER }
+
+when@test:
+  security:
+    password_hashers:
+      App\Entity\User:
+        algorithm: auto
+        cost: 4       # bcrypt
+        time_cost: 3  # argon
+        memory_cost: 10

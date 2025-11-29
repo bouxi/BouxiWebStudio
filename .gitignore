@@ -1,0 +1,23 @@
+# Symfony / PHP
+/vendor/
+var/
+.env.local
+.env.*.local
+.phpunit.result.cache
+
+# Logs
+var/log/
+*.log
+
+# Cache IDE
+.idea/
+.vscode/
+*.iml
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Docker
+mysql_data/
+.node_modules/

@@ -1,0 +1,19 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BouxiWebStudio{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block stylesheets %}{% endblock %}
+  </head>
+  <body>
+    {% block body %}{% endblock %}
+
+    {% block javascripts %}
+      {# ✅ charge app.js (qui importe Bootstrap + ton CSS) #}
+      {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+  </body>
+</html>
