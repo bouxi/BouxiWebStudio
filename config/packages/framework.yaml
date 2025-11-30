@@ -2,11 +2,18 @@
 framework:
     secret: '%env(APP_SECRET)%'
 
-    # Note that the session will be started ONLY if you read or write from it.
+    # Démarrage de session automatique si on lit/écrit dedans
     session: true
 
-    #esi: true
-    #fragments: true
+    # 🔹 Active le composant Form
+    form: true
+
+    # 🔹 Active la protection CSRF (utile pour les formulaires)
+    csrf_protection: true
+
+    # 🔹 Active le système de validation (contraintes @Assert, etc.)
+    validation:
+        enabled: true
 
 when@test:
     framework:

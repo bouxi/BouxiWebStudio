@@ -1,0 +1,74 @@
+<?php
+
+
+namespace App\Controller;
+
+use App\Entity\User;
+use App\Form\RegistrationFormType;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+
+class RegistrationController extends AbstractController
+{
+    /**
+     * Page d'inscription.
+     *
+     * - Affiche le formulaire
+     * - Valide les données
+     * - Hash le mot de passe
+     * - Sauvegarde l'utilisateur en BDD
+     */
+    #[Route('/register', name: 'app_register')]
+    public function register(
+        Request                     $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface      $em
+    ): Response
+    {
+        // Si l'utilisateur est déjà connecté, inutile de s'inscrire à nouveau
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_home');
+        }
+
+        $user = new User();
+
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupère le mot de passe en clair (plainPassword) depuis le formulaire
+            $plainPassword = $form->get('plainPassword')->getData();
+
+            // Hash du mot de passe
+            $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
+            $user->setPassword($hashedPassword);
+
+            // Rôles par défaut : ROLE_USER (normalement déjà mis dans le constructeur)
+            $user->setRoles(['ROLE_USER']);
+
+            // Dates (au cas où le constructeur ne l'aurait pas fait)
+            if (null === $user->getCreatedAt()) {
+                $user->setCreatedAt(new DateTimeImmutable());
+            }
+
+            // Sauvegarde en base
+            $em->persist($user);
+            $em->flush();
+
+            // Message de confirmation
+            $this->addFlash('success', 'Votre compte a été créé avec succès. Vous pouvez maintenant vous connecter.');
+
+            // Redirection vers la page de login
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
+    }
+}
