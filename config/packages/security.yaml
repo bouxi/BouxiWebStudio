@@ -41,7 +41,7 @@ security:
     # Login & register accessibles à tout le monde
     - { path: ^/login, roles: PUBLIC_ACCESS }
     - { path: ^/register, roles: PUBLIC_ACCESS }
-
+    - { path: ^/dashboard, roles: ROLE_USER }
     # Exemple : /profile uniquement pour les utilisateurs connectés
     - { path: ^/profile, roles: ROLE_USER }
 

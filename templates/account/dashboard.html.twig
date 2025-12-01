@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord — BouxiWebStudio{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Mon tableau de bord</h1>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card bg-secondary border-0">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Mes informations</h2>
+                    <p class="mb-1"><strong>Nom complet :</strong> {{ user.fullname }}</p>
+                    <p class="mb-1"><strong>E-mail :</strong> {{ user.email }}</p>
+                    <p class="mb-0">
+                        <strong>Inscrit depuis :</strong>
+                        {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : 'N/A' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card bg-secondary border-0">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Activité</h2>
+                    <p class="text-muted mb-0">
+                        Ici on affichera plus tard :
+                    </p>
+                    <ul class="text-muted mb-0">
+                        <li>Projets / demandes de devis</li>
+                        <li>Messages envoyés via le site</li>
+                        <li>Historique de contact avec BouxiWebStudio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
