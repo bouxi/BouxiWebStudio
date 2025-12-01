@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio — BouxiWebStudio{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4 text-center">Mes Réalisations</h1>
+
+    <p class="text-center text-secondary">
+        Voici quelques projets réalisés (ou en cours de création).
+    </p>
+
+    <div class="row g-4 mt-4">
+
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0">
+                <div class="card-body">
+                    <h3 class="h5">TheWinners</h3>
+                    <p>Site complet pour une guilde World of Warcraft : messagerie, guides, admin…</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0">
+                <div class="card-body">
+                    <h3 class="h5">TheCars</h3>
+                    <p>Marketplace automobile avec tableau de bord, gestion des annonces et filtres.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0">
+                <div class="card-body">
+                    <h3 class="h5">Events</h3>
+                    <p>Plateforme de gestion d’événements et de réservations avec calendrier.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
