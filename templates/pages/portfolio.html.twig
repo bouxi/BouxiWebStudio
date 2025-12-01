@@ -3,40 +3,28 @@
 {% block title %}Portfolio — BouxiWebStudio{% endblock %}
 
 {% block body %}
-    <h1 class="mb-4 text-center">Mes Réalisations</h1>
+    <h1 class="text-center mb-4">Mes Réalisations</h1>
 
-    <p class="text-center text-secondary">
-        Voici quelques projets réalisés (ou en cours de création).
-    </p>
+    <p class="text-secondary text-center">Quelques projets récents.</p>
 
     <div class="row g-4 mt-4">
 
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0">
-                <div class="card-body">
-                    <h3 class="h5">TheWinners</h3>
-                    <p>Site complet pour une guilde World of Warcraft : messagerie, guides, admin…</p>
-                </div>
-            </div>
-        </div>
+        {% set projets = [
+            { title: 'TheWinners', desc: 'Site complet de guilde WoW 3.3.5 : admin, guides, messagerie.' },
+            { title: 'TheCars', desc: 'Marketplace automobile complète avec filtres, annonces, dashboard.' },
+            { title: 'Events', desc: 'Gestion événements + réservations avec calendrier interactif.' }
+        ] %}
 
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0">
-                <div class="card-body">
-                    <h3 class="h5">TheCars</h3>
-                    <p>Marketplace automobile avec tableau de bord, gestion des annonces et filtres.</p>
+        {% for p in projets %}
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0">
+                    <div class="card-body">
+                        <h3 class="h5">{{ p.title }}</h3>
+                        <p>{{ p.desc }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0">
-                <div class="card-body">
-                    <h3 class="h5">Events</h3>
-                    <p>Plateforme de gestion d’événements et de réservations avec calendrier.</p>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
 
     </div>
 {% endblock %}
