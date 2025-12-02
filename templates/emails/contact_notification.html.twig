@@ -1,0 +1,17 @@
+{# templates/emails/contact_notification.html.twig #}
+<p>
+    Nouveau message de contact reçu via <strong>BouxiWebStudio</strong>.
+</p>
+
+<ul>
+    <li><strong>Nom :</strong> {{ contact.fullname }}</li>
+    <li><strong>Email :</strong> {{ contact.email }}</li>
+    <li><strong>Sujet :</strong> {{ contact.subject }}</li>
+    <li><strong>Envoyé le :</strong> {{ contact.createdAt|date('d/m/Y H:i') }}</li>
+</ul>
+
+<p><strong>Message :</strong></p>
+
+<p>
+    {{ contact.message|nl2br }}
+</p>
