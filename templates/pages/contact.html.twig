@@ -5,11 +5,46 @@
 {% block body %}
     <h1 class="text-center mb-4">Contact</h1>
 
-    <p class="text-secondary text-center mb-4">Formulaire complet en cours de préparation...</p>
+    <p class="text-secondary text-center mb-4">
+        Remplissez ce formulaire pour me contacter.
+    </p>
 
     <div class="card bg-secondary bg-opacity-25 border-0 mx-auto" style="max-width: 600px;">
-        <div class="card-body text-center">
-            <p>Le formulaire de contact sera ajouté à l’étape suivante.</p>
+        <div class="card-body">
+            {# On affiche les éventuels messages flash (success, error, etc.)
+           Ils sont déjà gérés globalement dans base.html.twig via _flash_messages #}
+
+            {{ form_start(contactForm) }}
+
+            <div class="mb-3">
+                {{ form_label(contactForm.fullname) }}
+                {{ form_widget(contactForm.fullname, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(contactForm.fullname) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(contactForm.email) }}
+                {{ form_widget(contactForm.email, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(contactForm.email) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(contactForm.subject) }}
+                {{ form_widget(contactForm.subject, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(contactForm.subject) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(contactForm.message) }}
+                {{ form_widget(contactForm.message, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(contactForm.message) }}
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+                Envoyer le message
+            </button>
+
+            {{ form_end(contactForm) }}
         </div>
     </div>
 {% endblock %}
