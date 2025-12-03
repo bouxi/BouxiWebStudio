@@ -1,46 +1,93 @@
-{# templates/pages/services.html.twig #}
+{# templates/home/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Services — BouxiWebStudio{% endblock %}
+{% block title %}Accueil — BouxiWebStudio{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mb-4">Mes Services</h1>
 
-    <p class="text-secondary text-center mb-5">
-        Voici les services proposés via BouxiWebStudio.
-    </p>
+    {# SECTION HERO #}
+    <section class="py-5 py-md-6">
+        <div class="row align-items-center">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <h1 class="display-5 fw-bold mb-3">
+                    Des applications web <span class="text-success">modernes</span> et <span class="text-success">sur mesure</span>.
+                </h1>
+                <p class="lead text-secondary mb-4">
+                    BouxiWebStudio développe des sites vitrines, marketplaces et applications complètes
+                    avec Symfony & PHP, en respectant les bonnes pratiques et la performance.
+                </p>
 
-    <div class="row g-4">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ path('app_services') }}" class="btn btn-success btn-lg">
+                        Découvrir mes services
+                    </a>
+                    <a href="{{ path('app_portfolio') }}" class="btn btn-outline-light btn-lg">
+                        Voir mes projets
+                    </a>
+                    <a href="{{ path('app_contact') }}" class="btn btn-outline-secondary">
+                        Me contacter
+                    </a>
+                </div>
+            </div>
 
-        {# Carte 1 : Site vitrine #}
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
-                <div class="card-body">
-                    <h3 class="h5">Site vitrine</h3>
-                    <p>Création de sites modernes, rapides et responsive.</p>
+            <div class="col-md-5">
+                {# Bloc "résumé technique" #}
+                <div class="card bg-secondary bg-opacity-25 border-0">
+                    <div class="card-body">
+                        <h2 class="h5 mb-3">Stack technique</h2>
+                        <ul class="mb-0">
+                            <li>Symfony 7, PHP 8.4, Doctrine ORM</li>
+                            <li>Bootstrap 5, Twig, HTML/CSS</li>
+                            <li>MySQL, Docker, Git/GitHub</li>
+                            <li>Projets structurés, code commenté et maintenable</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        {# Carte 2 : E-commerce #}
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
-                <div class="card-body">
-                    <h3 class="h5">E-commerce</h3>
-                    <p>Boutiques en ligne complètes : paiement, produits, commandes.</p>
+    {# SECTION "POURQUOI TRAVAILLER AVEC MOI ?" #}
+    <section class="mt-5">
+        <h2 class="h3 mb-4 text-center">Pourquoi travailler avec BouxiWebStudio ?</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Approche pédagogique</h3>
+                        <p class="mb-0">
+                            Code structuré, commenté, pensé pour évoluer dans le temps.
+                            Chaque projet est conçu comme une base solide, pas un simple bricolage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Expériences variées</h3>
+                        <p class="mb-0">
+                            Sites de guilde, marketplace auto, plateforme d’événements…
+                            Une vraie expérience sur des cas concrets et complexes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Technos modernes</h3>
+                        <p class="mb-0">
+                            Utilisation de Symfony, Docker, Bootstrap, MySQL.
+                            Prêt pour un déploiement propre en production le moment venu.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        {# Carte 3 : App sur mesure #}
-        <div class="col-md-4">
-            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
-                <div class="card-body">
-                    <h3 class="h5">Application sur mesure</h3>
-                    <p>Développement professionnel avec Symfony ou PHP POO.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
 {% endblock %}

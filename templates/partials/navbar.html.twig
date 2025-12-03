@@ -15,6 +15,7 @@
 
             {# MENU DE GAUCHE : pages publiques #}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {# Lien Accueil #}
                 <li class="nav-item">
                     <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}"
                        href="{{ path('app_home') }}">
@@ -22,15 +23,34 @@
                     </a>
                 </li>
 
-                {# Tu ajouteras plus tard Services, Portfolio, etc. #}
+                {# Lien Services #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_services' %} active{% endif %}"
+                       href="{{ path('app_services') }}">
+                        Services
+                    </a>
+                </li>
+
+                {# Lien Portfolio #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_portfolio' %} active{% endif %}"
+                       href="{{ path('app_portfolio') }}">
+                        Portfolio
+                    </a>
+                </li>
+
+                {# Lien Contact #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}"
+                       href="{{ path('app_contact') }}">
+                        Contact
+                    </a>
+                </li>
             </ul>
 
-            {# MENU DE DROITE : Auth + Dashboard + Admin #}
+            {# ... (le menu de droite avec admin/dashboard/login/inscription reste comme on l’a fait) #}
             <ul class="navbar-nav ms-auto">
-
                 {% if app.user %}
-
-                    {# ---------- LIEN ADMIN (VISIBLE UNIQUEMENT POUR ROLE_ADMIN) ---------- #}
                     {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link{% if app.request.get('_route') starts with 'admin_' %} active{% endif %}"
@@ -39,41 +59,30 @@
                             </a>
                         </li>
                     {% endif %}
-
-                    {# ---------- TABLEAU DE BORD UTILISATEUR ---------- #}
                     <li class="nav-item">
                         <a class="nav-link{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}"
                            href="{{ path('app_dashboard') }}">
                             Tableau de bord
                         </a>
                     </li>
-
-                    {# ---------- NOM DE L'UTILISATEUR ---------- #}
                     <li class="nav-item ms-2">
                         <span class="navbar-text">
                             {{ app.user.fullname ?? app.user.email }}
                         </span>
                     </li>
-
-                    {# ---------- DÉCONNEXION ---------- #}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
-
                 {% else %}
-                    {# ---------- CONNEXION ---------- #}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
                     </li>
-
-                    {# ---------- INSCRIPTION ---------- #}
                     <li class="nav-item">
                         <a class="btn btn-sm btn-success ms-2" href="{{ path('app_register') }}">
                             Inscription
                         </a>
                     </li>
                 {% endif %}
-
             </ul>
 
         </div>

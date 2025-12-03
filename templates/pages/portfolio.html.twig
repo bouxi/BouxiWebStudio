@@ -3,28 +3,76 @@
 {% block title %}Portfolio — BouxiWebStudio{% endblock %}
 
 {% block body %}
-    <h1 class="text-center mb-4">Mes Réalisations</h1>
+    <h1 class="text-center mb-4">Mes réalisations</h1>
 
-    <p class="text-secondary text-center">Quelques projets récents.</p>
+    <p class="text-secondary text-center mb-5">
+        Quelques projets représentatifs des types d’applications que je développe.
+    </p>
 
-    <div class="row g-4 mt-4">
+    <div class="row g-4">
 
-        {% set projets = [
-            { title: 'TheWinners', desc: 'Site complet de guilde WoW 3.3.5 : admin, guides, messagerie.' },
-            { title: 'TheCars', desc: 'Marketplace automobile complète avec filtres, annonces, dashboard.' },
-            { title: 'Events', desc: 'Gestion événements + réservations avec calendrier interactif.' }
-        ] %}
-
-        {% for p in projets %}
-            <div class="col-md-4">
-                <div class="card bg-secondary bg-opacity-25 border-0">
-                    <div class="card-body">
-                        <h3 class="h5">{{ p.title }}</h3>
-                        <p>{{ p.desc }}</p>
-                    </div>
+        {# Projet 1 : TheWinners #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="h5">TheWinners</h2>
+                    <p class="flex-grow-1">
+                        Site complet pour une guilde World of Warcraft :
+                        inscription, messagerie interne, guides, candidatures, administration.
+                    </p>
+                    <ul class="small text-secondary mb-3">
+                        <li>PHP POO & Symfony</li>
+                        <li>Gestion des rôles et permissions</li>
+                        <li>Interface membre + interface admin</li>
+                    </ul>
+                    <span class="badge bg-primary align-self-start">Projet communautaire</span>
                 </div>
             </div>
-        {% endfor %}
+        </div>
 
+        {# Projet 2 : TheCars #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="h5">TheCars</h2>
+                    <p class="flex-grow-1">
+                        Marketplace automobile avec annonces, gestion des utilisateurs,
+                        tableaux de bord vendeurs, filtres et recherche.
+                    </p>
+                    <ul class="small text-secondary mb-3">
+                        <li>PHP POO + Twig</li>
+                        <li>Architecture MVC custom</li>
+                        <li>Gestion avancée des entités (User, Car, etc.)</li>
+                    </ul>
+                    <span class="badge bg-success align-self-start">Marketplace</span>
+                </div>
+            </div>
+        </div>
+
+        {# Projet 3 : Events #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                    <h2 class="h5">Events</h2>
+                    <p class="flex-grow-1">
+                        Plateforme de billetterie et de réservation d’événements avec calendrier
+                        public, gestion des réservations et compte utilisateur.
+                    </p>
+                    <ul class="small text-secondary mb-3">
+                        <li>PHP 8.4 + Twig</li>
+                        <li>Routeur maison + sécurité CSRF</li>
+                        <li>Dashboard utilisateur + admin</li>
+                    </ul>
+                    <span class="badge bg-info align-self-start">Événementiel</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_contact') }}" class="btn btn-outline-light btn-lg">
+            Parler d’un projet similaire
+        </a>
     </div>
 {% endblock %}

@@ -1,25 +1,90 @@
-{% extends 'base.html.twig' %}
+{# templates/partials/navbar.html.twig #}
+<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
+            BouxiWebStudio
+        </a>
 
-{% block title %}Accueil — BouxiWebStudio{% endblock %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-{% block body %}
-    <div class="text-center mt-5">
-        <h1 class="mb-3">Bienvenue sur BouxiWebStudio</h1>
-        <p class="text-secondary mb-4">
-            Environnement Symfony prêt. Authentification en place. On peut construire le site. 🚀
-        </p>
+        <div class="collapse navbar-collapse" id="mainNavbar">
 
-        {% if not app.user %}
-            <a href="{{ path('app_register') }}" class="btn btn-success me-2">
-                Créer un compte
-            </a>
-            <a href="{{ path('app_login') }}" class="btn btn-outline-light">
-                Se connecter
-            </a>
-        {% else %}
-            <p class="mt-3">
-                Connecté en tant que <strong>{{ app.user.fullname ?? app.user.email }}</strong>.
-            </p>
-        {% endif %}
+            {# MENU DE GAUCHE : pages publiques #}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {# Lien Accueil #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}"
+                       href="{{ path('app_home') }}">
+                        Accueil
+                    </a>
+                </li>
+
+                {# Lien Services #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_services' %} active{% endif %}"
+                       href="{{ path('app_services') }}">
+                        Services
+                    </a>
+                </li>
+
+                {# Lien Portfolio #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_portfolio' %} active{% endif %}"
+                       href="{{ path('app_portfolio') }}">
+                        Portfolio
+                    </a>
+                </li>
+
+                {# Lien Contact #}
+                <li class="nav-item">
+                    <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}"
+                       href="{{ path('app_contact') }}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            {# ... (le menu de droite avec admin/dashboard/login/inscription reste comme on l’a fait) #}
+            <ul class="navbar-nav ms-auto">
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link{% if app.request.get('_route') starts with 'admin_' %} active{% endif %}"
+                               href="{{ path('admin_contact_index') }}">
+                                Admin
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}"
+                           href="{{ path('app_dashboard') }}">
+                            Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <span class="navbar-text">
+                            {{ app.user.fullname ?? app.user.email }}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-success ms-2" href="{{ path('app_register') }}">
+                            Inscription
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
     </div>
-{% endblock %}
+</nav>
