@@ -12,6 +12,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
+
+            {# MENU DE GAUCHE : pages publiques #}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}"
@@ -19,36 +21,61 @@
                         Accueil
                     </a>
                 </li>
-                {# Plus tard : Services, Portfolio, Contact, etc. #}
+
+                {# Tu ajouteras plus tard Services, Portfolio, etc. #}
             </ul>
 
+            {# MENU DE DROITE : Auth + Dashboard + Admin #}
             <ul class="navbar-nav ms-auto">
+
                 {% if app.user %}
+
+                    {# ---------- LIEN ADMIN (VISIBLE UNIQUEMENT POUR ROLE_ADMIN) ---------- #}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link{% if app.request.get('_route') starts with 'admin_' %} active{% endif %}"
+                               href="{{ path('admin_contact_index') }}">
+                                Admin
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {# ---------- TABLEAU DE BORD UTILISATEUR ---------- #}
                     <li class="nav-item">
                         <a class="nav-link{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}"
                            href="{{ path('app_dashboard') }}">
                             Tableau de bord
                         </a>
                     </li>
+
+                    {# ---------- NOM DE L'UTILISATEUR ---------- #}
                     <li class="nav-item ms-2">
                         <span class="navbar-text">
                             {{ app.user.fullname ?? app.user.email }}
                         </span>
                     </li>
+
+                    {# ---------- DÉCONNEXION ---------- #}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
+
                 {% else %}
+                    {# ---------- CONNEXION ---------- #}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
                     </li>
+
+                    {# ---------- INSCRIPTION ---------- #}
                     <li class="nav-item">
                         <a class="btn btn-sm btn-success ms-2" href="{{ path('app_register') }}">
                             Inscription
                         </a>
                     </li>
                 {% endif %}
+
             </ul>
+
         </div>
     </div>
 </nav>
