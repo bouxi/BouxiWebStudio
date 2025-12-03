@@ -5,12 +5,13 @@
 {% block body %}
     <h1 class="mb-4">Mon tableau de bord</h1>
 
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="card bg-secondary border-0">
+    <div class="row g-4 mb-4">
+        {# Carte Infos utilisateur #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
                 <div class="card-body">
                     <h2 class="h5 mb-3">Mes informations</h2>
-                    <p class="mb-1"><strong>Nom complet :</strong> {{ user.fullname }}</p>
+                    <p class="mb-1"><strong>Nom :</strong> {{ user.fullname ?? '—' }}</p>
                     <p class="mb-1"><strong>E-mail :</strong> {{ user.email }}</p>
                     <p class="mb-0">
                         <strong>Inscrit depuis :</strong>
@@ -20,21 +21,77 @@
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card bg-secondary border-0">
+        {# Carte Statistiques simples #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
                 <div class="card-body">
-                    <h2 class="h5 mb-3">Activité</h2>
-                    <p class="text-muted mb-0">
-                        Ici on affichera plus tard :
+                    <h2 class="h5 mb-3">Statistiques</h2>
+                    <p class="mb-1">
+                        <strong>Messages de contact envoyés :</strong>
+                        {{ totalMessages }}
                     </p>
-                    <ul class="text-muted mb-0">
-                        <li>Projets / demandes de devis</li>
-                        <li>Messages envoyés via le site</li>
-                        <li>Historique de contact avec BouxiWebStudio</li>
+                    <p class="mb-1">
+                        <strong>Rôles :</strong>
+                        {{ user.roles ? user.roles|join(', ') : 'ROLE_USER' }}
+                    </p>
+                    <p class="mb-0 text-secondary">
+                        Ces stats seront enrichies plus tard (devis, projets…).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        {# Carte Actions rapides (placeholder pour le futur) #}
+        <div class="col-md-4">
+            <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">Actions rapides</h2>
+                    <ul class="mb-0">
+                        <li><a href="{{ path('app_contact') }}">Envoyer un message de contact</a></li>
+                        <li><a href="{{ path('app_home') }}">Voir la page d’accueil</a></li>
+                        {# Plus tard : lien "Mettre à jour mon profil", "Voir mes projets", etc. #}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
 
+    {# Section des derniers messages de contact #}
+    <div class="card bg-secondary bg-opacity-25 border-0">
+        <div class="card-body">
+            <h2 class="h5 mb-3">Mes derniers messages de contact</h2>
+
+            {% if lastMessages is empty %}
+                <p class="text-secondary mb-0">
+                    Vous n’avez pas encore envoyé de message via le formulaire de contact.
+                </p>
+            {% else %}
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Sujet</th>
+                            <th>Extrait</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for msg in lastMessages %}
+                            <tr>
+                                <td>{{ msg.createdAt ? msg.createdAt|date('d/m/Y H:i') : '' }}</td>
+                                <td>{{ msg.subject }}</td>
+                                <td>
+                                    {{ msg.message|length > 80
+                                    ? msg.message|slice(0, 80) ~ '...'
+                                    : msg.message
+                                    }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
