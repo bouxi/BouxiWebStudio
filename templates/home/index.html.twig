@@ -1,90 +1,93 @@
-{# templates/partials/navbar.html.twig #}
-<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
-            BouxiWebStudio
-        </a>
+{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#mainNavbar" aria-controls="mainNavbar"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% block title %}Accueil — BouxiWebStudio{% endblock %}
 
-        <div class="collapse navbar-collapse" id="mainNavbar">
+{% block body %}
 
-            {# MENU DE GAUCHE : pages publiques #}
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {# Lien Accueil #}
-                <li class="nav-item">
-                    <a class="nav-link{% if app.request.get('_route') == 'app_home' %} active{% endif %}"
-                       href="{{ path('app_home') }}">
-                        Accueil
+    {# SECTION HERO #}
+    <section class="py-5 py-md-6">
+        <div class="row align-items-center">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <h1 class="display-5 fw-bold mb-3">
+                    Des applications web <span class="text-success">modernes</span> et <span class="text-success">sur mesure</span>.
+                </h1>
+                <p class="lead text-secondary mb-4">
+                    BouxiWebStudio développe des sites vitrines, marketplaces et applications complètes
+                    avec Symfony & PHP, en respectant les bonnes pratiques et la performance.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ path('app_services') }}" class="btn btn-success btn-lg">
+                        Découvrir mes services
                     </a>
-                </li>
-
-                {# Lien Services #}
-                <li class="nav-item">
-                    <a class="nav-link{% if app.request.get('_route') == 'app_services' %} active{% endif %}"
-                       href="{{ path('app_services') }}">
-                        Services
+                    <a href="{{ path('app_portfolio') }}" class="btn btn-outline-light btn-lg">
+                        Voir mes projets
                     </a>
-                </li>
-
-                {# Lien Portfolio #}
-                <li class="nav-item">
-                    <a class="nav-link{% if app.request.get('_route') == 'app_portfolio' %} active{% endif %}"
-                       href="{{ path('app_portfolio') }}">
-                        Portfolio
+                    <a href="{{ path('app_contact') }}" class="btn btn-outline-secondary">
+                        Me contacter
                     </a>
-                </li>
+                </div>
+            </div>
 
-                {# Lien Contact #}
-                <li class="nav-item">
-                    <a class="nav-link{% if app.request.get('_route') == 'app_contact' %} active{% endif %}"
-                       href="{{ path('app_contact') }}">
-                        Contact
-                    </a>
-                </li>
-            </ul>
-
-            {# ... (le menu de droite avec admin/dashboard/login/inscription reste comme on l’a fait) #}
-            <ul class="navbar-nav ms-auto">
-                {% if app.user %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li class="nav-item">
-                            <a class="nav-link{% if app.request.get('_route') starts with 'admin_' %} active{% endif %}"
-                               href="{{ path('admin_contact_index') }}">
-                                Admin
-                            </a>
-                        </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}"
-                           href="{{ path('app_dashboard') }}">
-                            Tableau de bord
-                        </a>
-                    </li>
-                    <li class="nav-item ms-2">
-                        <span class="navbar-text">
-                            {{ app.user.fullname ?? app.user.email }}
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-sm btn-success ms-2" href="{{ path('app_register') }}">
-                            Inscription
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-
+            <div class="col-md-5">
+                {# Bloc "résumé technique" #}
+                <div class="card bg-secondary bg-opacity-25 border-0">
+                    <div class="card-body">
+                        <h2 class="h5 mb-3">Stack technique</h2>
+                        <ul class="mb-0">
+                            <li>Symfony 7, PHP 8.4, Doctrine ORM</li>
+                            <li>Bootstrap 5, Twig, HTML/CSS</li>
+                            <li>MySQL, Docker, Git/GitHub</li>
+                            <li>Projets structurés, code commenté et maintenable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </section>
+
+    {# SECTION "POURQUOI TRAVAILLER AVEC MOI ?" #}
+    <section class="mt-5">
+        <h2 class="h3 mb-4 text-center">Pourquoi travailler avec BouxiWebStudio ?</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Approche pédagogique</h3>
+                        <p class="mb-0">
+                            Code structuré, commenté, pensé pour évoluer dans le temps.
+                            Chaque projet est conçu comme une base solide, pas un simple bricolage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Expériences variées</h3>
+                        <p class="mb-0">
+                            Sites de guilde, marketplace auto, plateforme d’événements…
+                            Une vraie expérience sur des cas concrets et complexes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card bg-secondary bg-opacity-25 border-0 h-100">
+                    <div class="card-body">
+                        <h3 class="h5">Technos modernes</h3>
+                        <p class="mb-0">
+                            Utilisation de Symfony, Docker, Bootstrap, MySQL.
+                            Prêt pour un déploiement propre en production le moment venu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
